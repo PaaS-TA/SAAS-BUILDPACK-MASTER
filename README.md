@@ -43,7 +43,7 @@ Web App은 개방형 클라우드 플랫폼에 배포되며 Pinpoint Collector B
 Web App은 Pinpoint 에이전트 와의 통합을 제공하는 Cloud Foundry의 최종 빌드 팩입니다. 
 이 빌드 팩은 java-buildpack 과 같은 다중 빌드 팩을 지원하는 최종 빌드 팩에서 작동합니다.
 
-Pinpoint Java Build Pack Git 주소 : https://github.com/yunjaecho/PINPOINT-JAVA-BUILDPACK-MASTER.git
+Pinpoint Java Build Pack Git 주소 : https://github.com/PaaS-TA/SAAS-BUILDPACK-MASTER.git
 
 
 ### <div id='21'> 2.1. Sample Web App 
@@ -67,9 +67,9 @@ Using manifest file manifest.yaml
 Getting app info...
 Updating app with these attributes...
   name:                spring-music
-  path:                /home/ubuntu/workspace/user/arom/pinpoint/PINPOINT-BUILDPACK-MASTER/build/spring-music.jar
+  path:                /home/ubuntu/workspace/user/arom/pinpoint/PaaS-TA/SAAS-BUILDPACK-MASTER/build/spring-music.jar
   buildpacks:
-    https://github.com/yunjaecho/PINPOINT-JAVA-BUILDPACK-MASTER
+    https://github.com/PaaS-TA/SAAS-BUILDPACK-MASTER
   command:             JAVA_OPTS="-agentpath:$PWD/.java-buildpack/open_jdk_jre/bin/jvmkill-1.16.0_RELEASE=printHeapHistogram=1 -Djava.io.tmpdir=$TMPDIR -javaagent:$PWD/.java-buildpack/pinpoint_agent/pinpoint-bootstrap-1.8.4.jar -Dpinpoint.agentId=spring-music -Dpinpoint.applicationName=spring-music -Djava.ext.dirs=$PWD/.java-buildpack/container_security_provider:$PWD/.java-buildpack/open_jdk_jre/lib/ext -Djava.security.properties=$PWD/.java-buildpack/java_security/java.security $JAVA_OPTS" && CALCULATED_MEMORY=$($PWD/.java-buildpack/open_jdk_jre/bin/java-buildpack-memory-calculator-3.13.0_RELEASE -totMemory=$MEMORY_LIMIT -loadedClasses=24435 -poolType=metaspace -stackThreads=250 -vmOptions="$JAVA_OPTS") && echo JVM Memory Configuration: $CALCULATED_MEMORY && JAVA_OPTS="$JAVA_OPTS $CALCULATED_MEMORY" && MALLOC_ARENA_MAX=2 SERVER_PORT=$PORT eval exec $PWD/.java-buildpack/open_jdk_jre/bin/java $JAVA_OPTS -cp $PWD/. org.springframework.boot.loader.JarLauncher
   disk quota:          1G
   health check type:   port
@@ -104,7 +104,7 @@ Staging app and tracing logs...
    Downloading build artifacts cache...
    Downloaded build artifacts cache (59.3M)
    Downloaded app package (42.3M)
-   -----> Java Buildpack e2d2933 | https://github.com/yunjaecho/PINPOINT-JAVA-BUILDPACK-MASTER#e2d2933
+   -----> Java Buildpack e2d2933 | https://github.com/PaaS-TA/SAAS-BUILDPACK-MASTER#e2d2933
    -----> Downloading Jvmkill Agent 1.16.0_RELEASE from https://java-buildpack.cloudfoundry.org/jvmkill/bionic/x86_64/jvmkill-1.16.0-RELEASE.so (found in cache)
    -----> Downloading Open Jdk JRE 1.8.0_222 from https://java-buildpack.cloudfoundry.org/openjdk/bionic/x86_64/openjdk-jre-1.8.0_222-bionic.tar.gz (found in cache)
           Expanding Open Jdk JRE to .java-buildpack/open_jdk_jre (1.0s)
@@ -136,7 +136,7 @@ requested state:   started
 routes:            spring-music-proud-fossa.15.164.20.58.xip.io
 last uploaded:     Wed 31 Jul 01:56:08 UTC 2019
 stack:             cflinuxfs3
-buildpacks:        https://github.com/yunjaecho/PINPOINT-JAVA-BUILDPACK-MASTER
+buildpacks:        https://github.com/PaaS-TA/SAAS-BUILDPACK-MASTER
 
 type:            web
 instances:       1/1
