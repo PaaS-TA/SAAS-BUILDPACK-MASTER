@@ -3,7 +3,7 @@ applications:
   - name: spring-music
     memory: 1G
     buildpacks:
-      - https://github.com/yunjaecho/PINPOINT-JAVA-BUILDPACK-MASTER
+      - https://github.com/PaaS-TA/SAAS-JAVA-BUILDPACK-MASTER
     random-route: true
     path: ./build/lib/spring-music.jar
     env:

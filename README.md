@@ -111,9 +111,9 @@ Staging app and tracing logs...
           JVM DNS caching disabled in lieu of BOSH DNS caching
    -----> Downloading Open JDK Like Memory Calculator 3.13.0_RELEASE from https://java-buildpack.cloudfoundry.org/memory-calculator/bionic/x86_64/memory-calculator-3.13.0-RELEASE.tar.gz (found in cache)
           Loaded Classes: 18664, Threads: 250
-   -----> Downloading Pinpoint Agent 1.3.0 from https://raw.githubusercontent.com/yunjaecho/PINPOINT-BUILDPACK-MASTER/master/pinpoint_agent_repo/pinpoint-agent-1.8.4.zip (found in cache)
+   -----> Downloading Pinpoint Agent 1.3.0 from https://raw.githubusercontent.com/PaaS-TA/SAAS-BUILDPACK-MASTER/master/pinpoint_agent_repo/pinpoint-agent-1.8.4.zip (found in cache)
           Expanding Pinpoint Agent to .java-buildpack/pinpoint_agent (0.1s)
-   [PinpointAgent]                  INFO  pinpoint_config_uri  https://raw.githubusercontent.com/yunjaecho/PINPOINT-BUILDPACK-MASTER/master/pinpoint.config
+   [PinpointAgent]                  INFO  pinpoint_config_uri  https://raw.githubusercontent.com/PaaS-TA/SAAS-BUILDPACK-MASTER/master/pinpoint.config
           downloading pinpoint.config to .java-buildpack/pinpoint_agent (0.4s)
    -----> Downloading Client Certificate Mapper 1.8.0_RELEASE from https://java-buildpack.cloudfoundry.org/client-certificate-mapper/client-certificate-mapper-1.8.0-RELEASE.jar (found in cache)
    -----> Downloading Container Security Provider 1.16.0_RELEASE from https://java-buildpack.cloudfoundry.org/container-security-provider/container-security-provider-1.16.0-RELEASE.jar (found in cache)
