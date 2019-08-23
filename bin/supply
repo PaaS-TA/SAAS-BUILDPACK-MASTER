@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+#set -euo pipefail
+set -e
+
+#
+# Copyright (c) 2017-Present Pivotal Software, Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+BIN_DIR=$(cd $(dirname $0); pwd)
+ROOT_DIR=$(dirname $BIN_DIR)
+BUILD_DIR=$1
+CACHE_DIR=$2
+DEPS_DIR=$3
+INDEX_DIR=$4
+
+source $BIN_DIR/staging-util.sh
+
+echo "Test .supply ###########################"
+
+topic "Staging Pinpoint-buildpack"
+## put code in <deps>/<index>
+
+
+## download PINPOINT_AGENT_ZIP && unzip
+if [ -z "${PINPOINT_AGENT_PACKAGE_DOWNLOAD_URL}" ]; then
+  PINPOINT_AGENT_PACKAGE_DOWNLOAD_URL="https://github.com/myminseok/pinpoint_agent_repo/blob/master/pinpoint-agent-1.8.2.tar.gz?raw=true" 
+fi
+
+DEPS_DIR_PINPOINT_AGENT_DIR=$DEPS_DIR/$INDEX_DIR/pinpoint
+mkdir -p $DEPS_DIR_PINPOINT_AGENT_DIR
+cd $DEPS_DIR_PINPOINT_AGENT_DIR
+topic "Downloading pinpoint agent binary from $PINPOINT_AGENT_PACKAGE_DOWNLOAD_URL"
+wget -q $PINPOINT_AGENT_PACKAGE_DOWNLOAD_URL -O pinpoint-agent.tar.gz > /dev/null 2>&1
+ls -alh pinpoint-agent.tar.gz
+tar xf pinpoint-agent.tar.gz > /dev/null 2>&1
+rm -rf pinpoint-agent.tar.gz
+
+
+## Downloading pinpoint.config 
+if [ -z "${PINPOINT_CONFIG_URL}" ]; then
+  topic "Use pinpoint.config packaged in $PINPOINT_AGENT_PACKAGE_DOWNLOAD_URL"
+else
+  pwd
+  rm -rf $DEPS_DIR_PINPOINT_AGENT_DIR/pinpoint.config
+  ls -al
+  topic "Downloading pinpoint.config from $PINPOINT_CONFIG_URL"
+  ## "https://raw.githubusercontent.com/myminseok/pinpoint_agent_repo/master/pinpoint.config-1.8.2" 
+  wget -q $PINPOINT_CONFIG_URL -O pinpoint.config
+  sed -i "s/127.0.0.1/$PINPOINT_COLLECTOR_IP/g" ./pinpoint.config
+fi
+
+topic "Configuring multi buildpack configuration to config.yml"
+cp $ROOT_DIR/lib/config.yml $DEPS_DIR/$INDEX_DIR/config.yml
+
+## find  "pinpoint-bootstrap*.jar" && replace to config.yml
+cd $DEPS_DIR_PINPOINT_AGENT_DIR
+PINPOINT_AGENT_JAR=`find . -type f -maxdepth 1 -name "pinpoint-bootstrap*.jar" -printf '%P\n'`
+sed -i "s/__PINPOINT.AGENT_JAR__/$PINPOINT_AGENT_JAR/g" $DEPS_DIR/$INDEX_DIR/config.yml
+
+APPLICATION_NAME=`echo $VCAP_APPLICATION | jq  .application_name -r`
+sed -i "s/__PINPOINT.APP_NAME__/$APPLICATION_NAME/g" $DEPS_DIR/$INDEX_DIR/config.yml
+sed -i "s/__PINPOINT.AGENT_ID__/$APPLICATION_NAME-\$INSTANCE_INDEX/g" $DEPS_DIR/$INDEX_DIR/config.yml
+sed -i "s/__INDEX_DIR__/$INDEX_DIR/g" $DEPS_DIR/$INDEX_DIR/config.yml
+
+cat $DEPS_DIR/$INDEX_DIR/config.yml
+
+
+topic "Configuring multi buildpack Completed" 

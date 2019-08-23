@@ -1,0 +1,5 @@
+name: pinpoint-buildpack
+config: 
+  java_opts:
+    system_properties:  { "AGENT_PATH": "/home/vcap/deps/__INDEX_DIR__/pinpoint", "pinpoint.agentId":"__PINPOINT.AGENT_ID__", "pinpoint.applicationName":"__PINPOINT.APP_NAME__"}
+    javaagents: [ "/vcap/deps/__INDEX_DIR__/pinpoint/__PINPOINT.AGENT_JAR__" ]
