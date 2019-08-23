@@ -9,5 +9,7 @@ applications:
     path: ./build/lib/spring-music.jar
     env:
       PINPOINT_COLLECTOR_IP: ((PINPOINT_COLLECTOR_IP))
-      PINPOINT_AGENT_PACKAGE_DOWNLOAD_URL: https://github.com/PaaS-TA/SAAS-BUILDPACK-MASTER/blob/master/pinpoint_agent_repo/pinpoint-agent-1.8.4.tar.gz
-      PINPOINT_CONFIG_URL: https://raw.githubusercontent.com/PaaS-TA/SAAS-BUILDPACK-MASTER/master/pinpoint.config
+      # PINPOINT_AGENT_PACKAGE_DOWNLOAD_URL: https://github.com/PaaS-TA/SAAS-BUILDPACK-MASTER/blob/master/pinpoint_agent_repo/pinpoint-agent-1.8.4.tar.gz
+      # PINPOINT_CONFIG_URL: https://raw.githubusercontent.com/PaaS-TA/SAAS-BUILDPACK-MASTER/master/pinpoint.config
+      PINPOINT_AGENT_PACKAGE_DOWNLOAD_URL: https://github.com/naver/pinpoint/releases/download/1.8.4/pinpoint-agent-1.8.4.tar.gz
+      PINPOINT_CONFIG_URL: https://raw.githubusercontent.com/yunjaecho/pinpoint_agent_repo/master/pinpoint.config-1.8.4
