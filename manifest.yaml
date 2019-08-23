@@ -3,8 +3,11 @@ applications:
   - name: spring-music
     memory: 1G
     buildpacks:
-      - https://github.com/PaaS-TA/SAAS-JAVA-BUILDPACK-MASTER
+      - https://github.com/PaaS-TA/SAAS-BUILDPACK-MASTER
+      - java_buildpack_offline
     random-route: true
     path: ./build/lib/spring-music.jar
     env:
       PINPOINT_COLLECTOR_IP: ((PINPOINT_COLLECTOR_IP))
+      PINPOINT_AGENT_PACKAGE_DOWNLOAD_URL: https://github.com/PaaS-TA/SAAS-BUILDPACK-MASTER/blob/master/pinpoint_agent_repo/pinpoint-agent-1.8.4.zip
+      PINPOINT_CONFIG_URL: https://raw.githubusercontent.com/PaaS-TA/SAAS-BUILDPACK-MASTER/master/pinpoint.config
