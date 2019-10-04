@@ -4,7 +4,7 @@ applications:
     memory: 1G
     buildpacks:
       - https://github.com/PaaS-TA/SAAS-BUILDPACK-MASTER
-      - java_buildpack_offline
+      - java_buildpack
     random-route: true
     path: ./build/lib/spring-music.jar
     env:
